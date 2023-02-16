@@ -1,25 +1,13 @@
 package org.example.kmpcalculator
 
-public fun hello(): String {
-    return platformHello()
+import org.bitcoindevkit.ElectrumConfig
+
+expect class AddressInfo(index: UInt, address: String) {
+    var index: UInt
+    var address: String
 }
 
-fun platformHello(): String {
-    return "Hello from everyone!"
-}
-
-public fun goodBye(): String {
-    return platformGoodBye()
-}
-
-expect fun platformGoodBye(): String
-
-expect class AddressInfoKMP(index: UInt, address: String) {
-    public var index: UInt
-    public var address: String
-}
-
-expect class AddressKMP(address: String) {
+expect class Address(address: String) {
     fun scriptPubkey(): Script
 }
 
@@ -34,7 +22,7 @@ expect class ElectrumConfig {
     var validateDomain: Boolean
 }
 
-expect class BlockchainKMP(config: ElectrumConfig) {
+expect class Blockchain(config: ElectrumConfig) {
     fun broadcast(psbt: PartiallySignedTransaction)
     fun getBlockHash(height: UInt): String
     fun getHeight(): UInt
