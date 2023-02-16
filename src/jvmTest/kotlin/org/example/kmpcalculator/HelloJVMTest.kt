@@ -24,7 +24,7 @@ class HelloJVMTest {
             stopGap = 20uL,
             validateDomain = true
         )
-        val blockchain = BlockchainKMP2(electrumConfig)
+        val blockchain = BlockchainKMP(electrumConfig)
         println("The block height is ${blockchain.getHeight()}")
     }
 

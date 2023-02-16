@@ -34,13 +34,11 @@ expect class ElectrumConfig {
     var validateDomain: Boolean
 }
 
-interface BlockchainKMP {
+expect class BlockchainKMP(config: ElectrumConfig) {
     fun broadcast(psbt: PartiallySignedTransaction)
     fun getBlockHash(height: UInt): String
     fun getHeight(): UInt
 }
-
-expect class BlockchainKMP2(config: ElectrumConfig): BlockchainKMP
 
 expect class PartiallySignedTransaction(psbtBase64: String) {
     fun combine(other: PartiallySignedTransaction): PartiallySignedTransaction

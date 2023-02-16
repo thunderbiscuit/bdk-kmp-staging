@@ -15,18 +15,18 @@ actual typealias Script = org.bitcoindevkit.Script
 actual typealias PartiallySignedTransaction = org.bitcoindevkit.PartiallySignedTransaction
 actual typealias ElectrumConfig = org.bitcoindevkit.ElectrumConfig
 
-actual class BlockchainKMP2 actual constructor(config: ElectrumConfig): BlockchainKMP {
+actual class BlockchainKMP actual constructor(config: ElectrumConfig){
     val blockchain = Blockchain(BlockchainConfig.Electrum(config))
 
-    override fun broadcast(psbt: PartiallySignedTransaction) {
+    actual fun broadcast(psbt: PartiallySignedTransaction) {
         blockchain.broadcast(psbt)
     }
 
-    override fun getBlockHash(height: UInt): String {
+    actual fun getBlockHash(height: UInt): String {
         return blockchain.getBlockHash(height)
     }
 
-    override fun getHeight(): UInt {
+    actual fun getHeight(): UInt {
         return blockchain.getHeight()
     }
 }
