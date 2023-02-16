@@ -25,11 +25,6 @@ expect class AddressKMP(address: String) {
 
 expect class Script(rawOutputScript: List<UByte>)
 
-expect sealed class BlockchainConfig {
-    data class Electrum(config: ElectrumConfig) : BlockchainConfig {
-
-    }
-}
 expect class ElectrumConfig {
     var url: String
     var socks5: String?
@@ -38,11 +33,15 @@ expect class ElectrumConfig {
     var stopGap: ULong
     var validateDomain: Boolean
 }
-expect class Blockchain(config: BlockchainConfig) {
+
+interface BlockchainKMP {
     fun broadcast(psbt: PartiallySignedTransaction)
     fun getBlockHash(height: UInt): String
     fun getHeight(): UInt
 }
+
+expect class BlockchainKMP2(config: ElectrumConfig): BlockchainKMP
+
 expect class PartiallySignedTransaction(psbtBase64: String) {
     fun combine(other: PartiallySignedTransaction): PartiallySignedTransaction
     fun extractTx(): List<UByte>
