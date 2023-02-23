@@ -1,6 +1,9 @@
 package org.example.kmpcalculator
 
+import org.bitcoindevkit.Auth
 import org.bitcoindevkit.ElectrumConfig
+import org.bitcoindevkit.Network
+import org.bitcoindevkit.RpcSyncParams
 
 expect class AddressInfo(index: UInt, address: String) {
     var index: UInt
@@ -22,10 +25,32 @@ expect class ElectrumConfig {
     var validateDomain: Boolean
 }
 
-expect class Blockchain(config: ElectrumConfig) {
+expect class EsploraConfig {
+    var baseUrl: String
+    var proxy: String?
+    var concurrency: UByte?
+    var stopGap: ULong
+    var timeout: ULong?
+}
+
+expect class RpcConfig {
+    var url: String
+    var auth: Auth
+    var network: Network
+    var walletName: String
+    var syncParams: RpcSyncParams?
+}
+
+expect class Blockchain(config: BlockchainConfig) {
     fun broadcast(psbt: PartiallySignedTransaction)
     fun getBlockHash(height: UInt): String
     fun getHeight(): UInt
+}
+
+sealed class BlockchainConfig {
+    data class Electrum(val config: ElectrumConfig): BlockchainConfig()
+    data class Esplora(val config: EsploraConfig): BlockchainConfig()
+    data class Rpc(val config: RpcConfig): BlockchainConfig()
 }
 
 expect class PartiallySignedTransaction(psbtBase64: String) {
