@@ -42,7 +42,7 @@ expect class RpcConfig {
 }
 
 expect class Blockchain(config: BlockchainConfig) {
-    fun broadcast(psbt: PartiallySignedTransaction)
+    fun broadcast(transaction: Transaction)
     fun getBlockHash(height: UInt): String
     fun getHeight(): UInt
 }
@@ -54,8 +54,8 @@ sealed class BlockchainConfig {
 }
 
 expect class PartiallySignedTransaction(psbtBase64: String) {
-    fun combine(other: PartiallySignedTransaction): PartiallySignedTransaction
-    fun extractTx(): List<UByte>
+    fun combine(other: PartiallySignedTransaction): org.bitcoindevkit.PartiallySignedTransaction
+    fun extractTx(): Transaction
     fun serialize(): String
     fun txid(): String
 }

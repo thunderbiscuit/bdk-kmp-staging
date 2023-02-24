@@ -45,12 +45,12 @@ kotlin {
         }
         val jvmMain by getting {
             dependencies {
-                implementation("org.bitcoindevkit:bdk-jvm:0.26.0")
+                implementation("org.bitcoindevkit:bdk-jvm:0.27.1")
             }
         }
         val jvmTest by getting {
             dependencies {
-                implementation("org.bitcoindevkit:bdk-jvm:0.26.0")
+                implementation("org.bitcoindevkit:bdk-jvm:0.27.1")
             }
         }
         // val nativeMain by getting

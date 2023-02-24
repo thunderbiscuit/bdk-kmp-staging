@@ -17,16 +17,16 @@ actual typealias RpcConfig = org.bitcoindevkit.RpcConfig
 // actual typealias Blockchain = org.bitcoindevkit.Blockchain
 
 actual class Blockchain actual constructor(config: BlockchainConfig) {
-    val configInternal = when (config) {
+    private val configInternal = when (config) {
         is BlockchainConfig.Electrum -> org.bitcoindevkit.BlockchainConfig.Electrum(config.config)
         is BlockchainConfig.Esplora -> org.bitcoindevkit.BlockchainConfig.Esplora(config.config)
         is BlockchainConfig.Rpc -> org.bitcoindevkit.BlockchainConfig.Rpc(config.config)
     }
 
-    val blockchain = org.bitcoindevkit.Blockchain(configInternal)
+    private val blockchain = org.bitcoindevkit.Blockchain(configInternal)
 
-    actual fun broadcast(psbt: PartiallySignedTransaction) {
-        blockchain.broadcast(psbt)
+    actual fun broadcast(transaction: Transaction) {
+        blockchain.broadcast(transaction)
     }
 
     actual fun getBlockHash(height: UInt): String {
@@ -37,19 +37,3 @@ actual class Blockchain actual constructor(config: BlockchainConfig) {
         return blockchain.getHeight()
     }
 }
-
-// actual class Blockchain actual constructor(config: ElectrumConfig){
-//     val blockchain = BlockchainBDK(BlockchainConfig.Electrum(config))
-//
-//     actual fun broadcast(psbt: PartiallySignedTransaction) {
-//         blockchain.broadcast(psbt)
-//     }
-//
-//     actual fun getBlockHash(height: UInt): String {
-//         return blockchain.getBlockHash(height)
-//     }
-//
-//     actual fun getHeight(): UInt {
-//         return blockchain.getHeight()
-//     }
-// }
