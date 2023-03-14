@@ -1,4 +1,4 @@
-package org.example.kmpcalculator
+package org.bitcoindevkit.kmp
 
 import kotlin.test.Test
 import kotlin.test.assertEquals

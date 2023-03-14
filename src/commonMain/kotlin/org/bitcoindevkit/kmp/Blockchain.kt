@@ -1,4 +1,4 @@
-package org.example.kmpcalculator
+package org.bitcoindevkit.kmp
 
 import org.bitcoindevkit.Auth
 import org.bitcoindevkit.ElectrumConfig
